@@ -108,7 +108,7 @@
       flex-direction: column;
       gap: 15px;
     }
-    
+
     input,
     textarea {
       width: 100%;
@@ -172,13 +172,14 @@
     <h1>Vegas Vigilância</h1>
     <nav>
       <a href="index.html">Nova Pesquisa</a>
-     
+
     </nav>
   </header>
 
   <div class="container">
     <h2>Pesquisa de Satisfação</h2>
-    <p>Sua opinião é muito importante para nós <br> De 0 a 10 o quanto você indicaria a Vegas Vigilância para um amigo</p>
+    <p>Sua opinião é muito importante para nós <br> De 0 a 10 o quanto você indicaria a Vegas Vigilância para um amigo
+    </p>
 
     <!-- Quadradinhos de 0 a 10 -->
     <div class="notas" id="notas">
@@ -210,42 +211,47 @@
       Monitoramento 24h - Segurança Residencial e Empresarial<br>
       © 2025 Vegas Vigilância. Todos os direitos reservados.</p>
   </footer>
-<script>
-  const notas = document.querySelectorAll('.nota');
-  const notaInput = document.getElementById('notaEscolhida');
-  const form = document.getElementById('form');
 
-  notas.forEach(nota => {
-    nota.addEventListener('click', () => {
-      notas.forEach(n => n.classList.remove('selected'));
-      nota.classList.add('selected');
-      notaInput.value = nota.dataset.value;
+  <script>
+    const notas = document.querySelectorAll('.nota');
+    const notaInput = document.getElementById('notaEscolhida');
+    const form = document.getElementById('form');
+
+    notas.forEach(nota => {
+      nota.addEventListener('click', () => {
+        notas.forEach(n => n.classList.remove('selected'));
+        nota.classList.add('selected');
+        notaInput.value = nota.dataset.value;
+      });
     });
-  });
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    const formData = new URLSearchParams();
-    formData.append("nota", document.getElementById('notaEscolhida').value);
-    formData.append("nome", document.getElementById('nome').value);
-    formData.append("telefone", document.getElementById('telefone').value);
-    formData.append("endereco", document.getElementById('endereco').value);
-    formData.append("comentarios", document.getElementById('comentarios').value);
+      const formData = new FormData();
+      formData.append("nota", document.getElementById('notaEscolhida').value);
+      formData.append("nome", document.getElementById('nome').value);
+      formData.append("telefone", document.getElementById('telefone').value);
+      formData.append("endereco", document.getElementById('endereco').value);
+      formData.append("comentarios", document.getElementById('comentarios').value);
 
-    fetch("https://script.google.com/macros/s/AKfycbyJNRh-UDr41W1-0gFIvrcaaXHCevlUtE2qApyuQUJ5KAodglpzvUpNoZgdGuzbKasJ/exec", {
-      method: "POST",
-      body: formData
-    }).then(() => {
-      alert("Avaliação enviada com sucesso!");
-      form.reset();
-      notas.forEach(n => n.classList.remove('selected'));
-    }).catch(() => {
-      alert("Erro ao enviar. Verifique sua conexão.");
+      fetch("https://script.google.com/macros/s/AKfycbyWjOFPR3JSlJOLuHst4jcUrBsCp2VOqikGV8xNIl_0MCDYm__BMuwCHK4QbW6lY3yimA/exec", {
+        method: "POST",
+        body: formData
+      }).then(res => res.text())
+        .then(data => {
+          alert("Avaliação enviada com sucesso!");
+          form.reset();
+          notas.forEach(n => n.classList.remove('selected'));
+        })
+        .catch(err => {
+          console.error("Erro ao enviar:", err);
+          alert("Erro ao enviar. Verifique sua conexão.");
+        });
     });
-  });
-</script>
+  </script>
 
- 
+
 </body>
+
 </html>
