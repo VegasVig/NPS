@@ -172,7 +172,7 @@
     <h1>Vegas Vigilância</h1>
     <nav>
       <a href="index.html">Nova Pesquisa</a>
-      <a href="dashboard.html">Dashboard</a>
+     
     </nav>
   </header>
 
@@ -210,33 +210,42 @@
       Monitoramento 24h - Segurança Residencial e Empresarial<br>
       © 2025 Vegas Vigilância. Todos os direitos reservados.</p>
   </footer>
+<script>
+  const notas = document.querySelectorAll('.nota');
+  const notaInput = document.getElementById('notaEscolhida');
+  const form = document.getElementById('form');
 
-  <script>
-    const notas = document.querySelectorAll('.nota');
-    const hiddenInput = document.getElementById('notaEscolhida');
-    let selectedNota = null;
-
-    notas.forEach(nota => {
-      nota.addEventListener('click', () => {
-        notas.forEach(n => n.classList.remove('selected'));
-        nota.classList.add('selected');
-        selectedNota = nota.getAttribute('data-value');
-        hiddenInput.value = selectedNota;
-      });
-    });
-
-    document.getElementById('form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (selectedNota === null) {
-        alert("Por favor, selecione uma nota de 0 a 10.");
-        return;
-      }
-      alert("Obrigado pela sua avaliação!\nNota: " + selectedNota);
-      this.reset();
+  notas.forEach(nota => {
+    nota.addEventListener('click', () => {
       notas.forEach(n => n.classList.remove('selected'));
-      hiddenInput.value = "";
-      selectedNota = null;
+      nota.classList.add('selected');
+      notaInput.value = nota.dataset.value;
     });
-  </script>
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new URLSearchParams();
+    formData.append("nota", document.getElementById('notaEscolhida').value);
+    formData.append("nome", document.getElementById('nome').value);
+    formData.append("telefone", document.getElementById('telefone').value);
+    formData.append("endereco", document.getElementById('endereco').value);
+    formData.append("comentarios", document.getElementById('comentarios').value);
+
+    fetch("https://script.google.com/macros/s/AKfycbzvmkB6g6M0c7oDJf9zxK0hS8LUvLkuQoU9ttN0W4bPsLa_-_FjMRN35nNwBWvyiREG/exec", {
+      method: "POST",
+      body: formData
+    }).then(() => {
+      alert("Avaliação enviada com sucesso!");
+      form.reset();
+      notas.forEach(n => n.classList.remove('selected'));
+    }).catch(() => {
+      alert("Erro ao enviar. Verifique sua conexão.");
+    });
+  });
+</script>
+
+ 
 </body>
 </html>
