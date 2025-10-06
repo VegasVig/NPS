@@ -43,7 +43,7 @@
     .container h2 {
       margin-bottom: 10px;
       font-size: 22px;
-      color: #555b5a;
+      color: #f8fbfa;
     }
 
     .container p {
@@ -129,7 +129,7 @@
 
     label {
       font-size: 14px;
-      color: #474d4c;
+      color: white;
       font-weight: bold;
     }
 
@@ -151,7 +151,7 @@
 
     footer {
       background: #0a0a0a;
-      color: #999;
+      color: white;
       text-align: center;
       padding: 15px;
       margin-top: 40px;
@@ -194,14 +194,16 @@
       <input type="text" id="nome" placeholder="Nome completo" required>
       <input type="tel" id="telefone" placeholder="(00) 00000-0000" required>
 
-      <label for="produtos" placeholder="Qual o seu Produto" ></label>
-      <select id="produtos" name="produtos" multiple required>
-        <option value="Alarme Monitorado">Alarme Monitorado</option>
-        <option value="Câmeras de Segurança">Câmeras de Segurança</option>
-        <option value="Rastreador Veicular">Rastreador Veicular</option>
-        <option value="Vigilância/Portaria">Vigilância / Portaria</option>
-        <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
-      </select>
+     <label for="produtos">Qual o seu produto</label>
+<select id="produtos" name="produtos" multiple required>
+  <option disabled selected>Selecione seu produto</option>
+  <option value="Alarme Monitorado">Alarme Monitorado</option>
+  <option value="Câmeras de Segurança">Câmeras de Segurança</option>
+  <option value="Rastreador Veicular">Rastreador Veicular</option>
+  <option value="Vigilância/Portaria">Vigilância / Portaria</option>
+  <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
+</select>
+
 
       <textarea id="comentarios" placeholder="Comentários (opcional)"></textarea>
       <button type="submit">Enviar Avaliação</button>
