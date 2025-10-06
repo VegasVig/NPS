@@ -12,108 +12,113 @@
       font-family: Arial, sans-serif;
     }
 
-    img {
-      width: 50px;
-      height: 50px;
-    }
-
     body {
-      background: #f4f6f9;
-      color: #333;
+      background-color: #000;
+      color: #fff;
     }
 
     header {
-      background: #00060c;
+      background: #0a0a0a;
       color: #fff;
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 15px 25px;
+      text-align: center;
+      border-bottom: 2px solid #5f6463;
     }
 
-    header h1 {
-      font-size: 18px;
-      align-items: center;
-    }
-
-    header nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    header nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
+    header img {
+      width: 100%;
+      height: 60%;
     }
 
     .container {
-      max-width: 500px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0px 3px 8px rgba(11, 0, 0, 0.1);
+      max-width: 550px;
+      margin: 40px auto;
+      background: #111;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 12px rgba(0, 255, 204, 0.15);
       text-align: center;
     }
 
     .container h2 {
       margin-bottom: 10px;
       font-size: 22px;
-      color: #000811;
+      color: #555b5a;
     }
 
     .container p {
-      font-size: 14px;
+      font-size: 15px;
+      color: #ccc;
       margin-bottom: 20px;
     }
 
-    /* NOTAS */
     .notas {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 2px;
-      margin-bottom: 20px;
+      gap: 5px;
+      margin-bottom: 10px;
+      flex-wrap: nowrap;
     }
 
     .nota {
-      width: 25px;
-      height: 25px;
+      width: 35px;
+      height: 35px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #333;
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
+      color: #000;
       user-select: none;
-      transition: all 0.2s;
+      transition: transform 0.2s, opacity 0.2s;
     }
 
-    .nota:hover {
-      background: #eee;
-    }
+    .nota[data-value="0"], .nota[data-value="1"], .nota[data-value="2"] { background: #ff4d4d; }
+    .nota[data-value="3"], .nota[data-value="4"] { background: #ff6a00; }
+    .nota[data-value="5"], .nota[data-value="6"] { background: #ffcc00; }
+    .nota[data-value="7"], .nota[data-value="8"] { background: #c6ff00; }
+    .nota[data-value="9"], .nota[data-value="10"] { background: #4CAF50; }
 
     .nota.selected {
-      background: #0d1114;
-      color: #fff;
-      border-color: #0d1114;
+      outline: 3px solid #464a49;
+      transform: scale(1.1);
     }
+
+    .legendas {
+      display: flex;
+      justify-content: center;
+      font-size: 11px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .legenda {
+      text-align: center;
+      width: 20%;
+      padding: 2px;
+    }
+
+    .legenda:nth-child(1) { color: #ff4d4d; }
+    .legenda:nth-child(2) { color: #ff6a00; }
+    .legenda:nth-child(3) { color: #ffcc00; }
+    .legenda:nth-child(4) { color: #c6ff00; }
+    .legenda:nth-child(5) { color: #4CAF50; }
 
     form {
       display: flex;
       flex-direction: column;
       gap: 15px;
+      text-align: left;
     }
 
-    input,
-    textarea {
+    input, textarea, select {
       width: 100%;
       padding: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid #333;
       border-radius: 6px;
+      background: #1a1a1a;
+      color: #fff;
       font-size: 14px;
     }
 
@@ -122,67 +127,48 @@
       min-height: 80px;
     }
 
+    label {
+      font-size: 14px;
+      color: #474d4c;
+      font-weight: bold;
+    }
+
     button {
-      background: #0d1114;
-      color: #fff;
+      background: #404342;
+      color: #000;
       padding: 12px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       font-size: 16px;
+      font-weight: bold;
       transition: background 0.3s;
     }
 
     button:hover {
-      background: #585c61;
+      background: #3f4242;
     }
 
     footer {
-      background: #020e1b;
-      color: #fff;
+      background: #0a0a0a;
+      color: #999;
       text-align: center;
       padding: 15px;
       margin-top: 40px;
       font-size: 13px;
     }
-
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      header nav {
-        gap: 10px;
-      }
-
-      .container {
-        margin: 15px;
-        padding: 20px;
-        align-items: center;
-      }
-    }
   </style>
 </head>
-
 <body>
   <header>
-    <img src="./assets/LOGO-VEGAS.png" alt="">
-    <h1>Vegas Vigilância</h1>
-    <nav>
-      <a href="index.html">Nova Pesquisa</a>
-
-    </nav>
+    <img src="./assets/logovegas.jpg" alt="Logo Vegas Vigilância">
   </header>
 
   <div class="container">
-    <h2>Pesquisa de Satisfação</h2>
-    <p>Sua opinião é muito importante para nós <br> De 0 a 10 o quanto você indicaria a Vegas Vigilância para um amigo
-    </p>
+    <h2>Sua opinião faz a diferença</h2>
+    <p>De 0 a 10, o quanto você indicaria a Vegas Vigilância para um amigo?</p>
 
-    <!-- Quadradinhos de 0 a 10 -->
     <div class="notas" id="notas">
-      <div class="nota" data-value="0">0</div>
       <div class="nota" data-value="1">1</div>
       <div class="nota" data-value="2">2</div>
       <div class="nota" data-value="3">3</div>
@@ -195,20 +181,36 @@
       <div class="nota" data-value="10">10</div>
     </div>
 
+    <div class="legendas">
+      <div class="legenda">Extremamente<br>Insatisfeito</div>
+      <div class="legenda">Insatisfeito</div>
+      <div class="legenda">Nem satisfeito<br>nem insatisfeito</div>
+      <div class="legenda">Satisfeito</div>
+      <div class="legenda">Totalmente<br>Satisfeito</div>
+    </div>
+
     <form id="form">
       <input type="hidden" id="notaEscolhida" name="notaEscolhida">
       <input type="text" id="nome" placeholder="Seu nome completo" required>
       <input type="tel" id="telefone" placeholder="(00) 00000-0000" required>
-      <input type="text" id="endereco" placeholder="Endereço do imóvel monitorado" required>
+
+      <label for="produtos">Qual seu produto?</label>
+      <select id="produtos" name="produtos" multiple required>
+        <option value="Alarme Monitorado">Alarme Monitorado</option>
+        <option value="Câmeras de Segurança">Câmeras de Segurança</option>
+        <option value="Rastreador Veicular">Rastreador Veicular</option>
+        <option value="Vigilância/Portaria">Vigilância / Portaria</option>
+        <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
+      </select>
+
       <textarea id="comentarios" placeholder="Comentários (opcional)"></textarea>
       <button type="submit">Enviar Avaliação</button>
     </form>
   </div>
 
   <footer>
-    <p>Vegas Vigilância<br>
-      Monitoramento 24h - Segurança Residencial e Empresarial<br>
-      © 2025 Vegas Vigilância. Todos os direitos reservados.</p>
+    <p>Monitoramento 24h • Segurança Residencial e Empresarial<br>
+    © 2025 Vegas Vigilância</p>
   </footer>
 
   <script>
@@ -227,11 +229,15 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
+      const produtosSelecionados = Array.from(document.getElementById('produtos').selectedOptions)
+        .map(opt => opt.value)
+        .join(", ");
+
       const formData = new FormData();
       formData.append("nota", document.getElementById('notaEscolhida').value);
       formData.append("nome", document.getElementById('nome').value);
       formData.append("telefone", document.getElementById('telefone').value);
-      formData.append("endereco", document.getElementById('endereco').value);
+      formData.append("produtos", produtosSelecionados);
       formData.append("comentarios", document.getElementById('comentarios').value);
 
       fetch("https://script.google.com/macros/s/AKfycbyWjOFPR3JSlJOLuHst4jcUrBsCp2VOqikGV8xNIl_0MCDYm__BMuwCHK4QbW6lY3yimA/exec", {
@@ -249,8 +255,5 @@
         });
     });
   </script>
-
-
 </body>
-
 </html>
