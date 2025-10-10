@@ -243,7 +243,7 @@
       formData.append("produtos", produtosSelecionados);
       formData.append("comentarios", document.getElementById('comentarios').value);
 
-      fetch("https://script.google.com/macros/s/AKfycbyWjOFPR3JSlJOLuHst4jcUrBsCp2VOqikGV8xNIl_0MCDYm__BMuwCHK4QbW6lY3yimA/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbyiGedsPHMibL87lObnRy_nKfHWxhhIOd1gJG14A1fkilz9Mw9dCGaJsxciYsbMIfZGbA/exec", {
         method: "POST",
         body: formData
       }).then(res => res.text())
