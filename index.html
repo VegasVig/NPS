@@ -2,321 +2,309 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NPS-Vegas-Vigilância</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPS Vegas Vigilância</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-    body {
-      background-color: #000;
-      color: white;
-    }
+        body {
+            background-color: #000;
+            color: white;
+        }
 
-    header {
-      background: #0a0a0a;
-      color: #fff;
-      padding: 15px 25px;
-      text-align: center;
-      border-bottom: 2px solid #5f6463;
-    }
+        header {
+            background: #0a0a0a;
+            color: #fff;
+            padding: 15px 25px;
+            text-align: center;
+            border-bottom: 2px solid #5f6463;
+        }
 
-    header img {
-      width: 100%;
-      height: 60%;
-    }
+        header img {
+            width: 100%;
+            height: 60%;
+        }
 
-    .container {
-      max-width: 550px;
-      margin: 20px auto;
-      background: #111;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0px 0px 12px rgba(0, 255, 204, 0.15);
-      text-align: center;
-    }
+        .container {
+            max-width: 550px;
+            margin: 20px auto;
+            background: #111;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 12px rgba(0, 255, 204, 0.15);
+            text-align: center;
+        }
 
-    .container h2 {
-      margin-bottom: 10px;
-      font-size: 22px;
-      color: #f8fbfa;
-    }
+        .container h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+            color: #f8fbfa;
+        }
 
-    .container p {
-      font-size: 15px;
-      color: white;
-      margin-bottom: 20px;
-    }
+        .container p {
+            font-size: 15px;
+            color: white;
+            margin-bottom: 20px;
+        }
 
-    .notas {
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-      margin-bottom: 10px;
-      flex-wrap: nowrap;
-    }
+        .notas {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 10px;
+            flex-wrap: nowrap;
+        }
 
-    .nota {
-      width: 35px;
-      height: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      color: #000;
-      user-select: none;
-      transition: transform 0.2s, opacity 0.2s;
-    }
+        .nota {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #000;
+            user-select: none;
+            transition: transform 0.2s, opacity 0.2s;
+        }
 
-    .nota[data-value="0"],
-    .nota[data-value="1"],
-    .nota[data-value="2"] {
-      background: #ff4d4d;
-    }
+        .nota[data-value="0"],
+        .nota[data-value="1"],
+        .nota[data-value="2"] {
+            background: #ff4d4d;
+        }
 
-    .nota[data-value="3"],
-    .nota[data-value="4"] {
-      background: #ff6a00;
-    }
+        .nota[data-value="3"],
+        .nota[data-value="4"] {
+            background: #ff6a00;
+        }
 
-    .nota[data-value="5"],
-    .nota[data-value="6"] {
-      background: #ffcc00;
-    }
+        .nota[data-value="5"],
+        .nota[data-value="6"] {
+            background: #ffcc00;
+        }
 
-    .nota[data-value="7"],
-    .nota[data-value="8"] {
-      background: #c6ff00;
-    }
+        .nota[data-value="7"],
+        .nota[data-value="8"] {
+            background: #c6ff00;
+        }
 
-    .nota[data-value="9"],
-    .nota[data-value="10"] {
-      background: #4CAF50;
-    }
+        .nota[data-value="9"],
+        .nota[data-value="10"] {
+            background: #4CAF50;
+        }
 
-    .nota.selected {
-      outline: 3px solid #464a49;
-      transform: scale(1.1);
-    }
+        .nota.selected {
+            outline: 3px solid #464a49;
+            transform: scale(1.1);
+        }
 
-    .legendas {
-      display: flex;
-      justify-content: center;
-      font-size: 11px;
-      color: white;
-      margin-bottom: 20px;
-    }
+        .legendas {
+            display: flex;
+            justify-content: center;
+            font-size: 11px;
+            color: white;
+            margin-bottom: 20px;
+        }
 
-    .legenda {
-      text-align: center;
-      width: 20%;
-      padding: 2px;
-    }
+        .legenda {
+            text-align: center;
+            width: 20%;
+            padding: 2px;
+        }
 
-    .legenda:nth-child(1) {
-      color: #ff4d4d;
-    }
+        .legenda:nth-child(1) {
+            color: #ff4d4d;
+        }
 
-    .legenda:nth-child(2) {
-      color: #ff6a00;
-    }
+        .legenda:nth-child(2) {
+            color: #ff6a00;
+        }
 
-    .legenda:nth-child(3) {
-      color: #ffcc00;
-    }
+        .legenda:nth-child(3) {
+            color: #ffcc00;
+        }
 
-    .legenda:nth-child(4) {
-      color: #c6ff00;
-    }
+        .legenda:nth-child(4) {
+            color: #c6ff00;
+        }
 
-    .legenda:nth-child(5) {
-      color: #4CAF50;
-    }
+        .legenda:nth-child(5) {
+            color: #4CAF50;
+        }
 
-    form {
-      color: white;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      text-align: left;
-    }
+        form {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
 
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #333;
-      border-radius: 6px;
-      background: #1a1a1a;
-      color: white;
-      font-size: 14px;
-    }
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            background: #1a1a1a;
+            color: white;
+            font-size: 14px;
+        }
 
-    textarea {
-      resize: none;
-      min-height: 80px;
-    }
+        textarea {
+            resize: none;
+            min-height: 80px;
+        }
 
-    label {
-      font-size: 14px;
-      color: white;
-      font-weight: bold;
-    }
+        label {
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+        }
 
-    button {
-      background: #404342;
-      color: #000;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
+        button {
+            background: #404342;
+            color: #000;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
 
-    button:hover {
-      background: #3f4242;
-    }
+        button:hover {
+            background: #3f4242;
+        }
 
-    footer {
-      background: #0a0a0a;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-      font-size: 13px;
-    }
-  </style>
+        footer {
+            background: #0a0a0a;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-    <img src="./assets/logovegas.jpg" alt="Logo Vegas Vigilância">
-  </header>
+    <header>
+        <img src="./assets/logovegas.jpg" alt="Logo Vegas Vigilância">
+    </header>
 
-  <div class="container">
-    <h2>Sua opinião faz a diferença</h2>
-    <p>De 1 a 10, o quanto você indicaria a Vegas Vigilância para um amigo?</p>
+    <div class="container">
+        <h2>Sua opinião faz a diferença</h2>
+        <p>De 1 a 10, o quanto você indicaria a Vegas Vigilância para um amigo?</p>
 
-    <div class="notas" id="notas">
-      <div class="nota" data-value="1">1</div>
-      <div class="nota" data-value="2">2</div>
-      <div class="nota" data-value="3">3</div>
-      <div class="nota" data-value="4">4</div>
-      <div class="nota" data-value="5">5</div>
-      <div class="nota" data-value="6">6</div>
-      <div class="nota" data-value="7">7</div>
-      <div class="nota" data-value="8">8</div>
-      <div class="nota" data-value="9">9</div>
-      <div class="nota" data-value="10">10</div>
+        <div class="notas" id="notas">
+            <div class="nota" data-value="1">1</div>
+            <div class="nota" data-value="2">2</div>
+            <div class="nota" data-value="3">3</div>
+            <div class="nota" data-value="4">4</div>
+            <div class="nota" data-value="5">5</div>
+            <div class="nota" data-value="6">6</div>
+            <div class="nota" data-value="7">7</div>
+            <div class="nota" data-value="8">8</div>
+            <div class="nota" data-value="9">9</div>
+            <div class="nota" data-value="10">10</div>
+        </div>
+
+        <div class="legendas">
+            <div class="legenda">Muito<br>Insatisfeito</div>
+            <div class="legenda">Insatisfeito</div>
+            <div class="legenda">Nem satisfeito<br>nem insatisfeito</div>
+            <div class="legenda">Satisfeito</div>
+            <div class="legenda">Totalmente<br>Satisfeito</div>
+        </div>
+
+        <form id="form">
+            <input type="hidden" id="notaEscolhida" name="nota">
+
+            <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+
+            <label for="produtos">Selecione seu produto:</label>
+            <select id="produtos" name="produtos" >
+                <option value="Alarme Monitorado">Alarme Monitorado</option>
+                <option value="Câmeras de Segurança">Câmeras de Segurança</option>
+                <option value="Rastreador Veicular">Rastreador Veicular</option>
+                <option value="Vigilância/Portaria">Vigilância / Portaria</option>
+                <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
+            </select>
+
+            <textarea id="comentarios" name="comentarios" placeholder="Comentários (opcional)"></textarea>
+            <button type="submit">Enviar Avaliação</button>
+        </form>
     </div>
 
-    <div class="legendas">
-      <div class="legenda">Muito<br>Insatisfeito</div>
-      <div class="legenda">Insatisfeito</div>
-      <div class="legenda">Nem satisfeito<br>nem insatisfeito</div>
-      <div class="legenda">Satisfeito</div>
-      <div class="legenda">Totalmente<br>Satisfeito</div>
-    </div>
+    <footer>
+        <p>Monitoramento 24h • Segurança Residencial e Empresarial<br>
+            © 2025 Vegas Vigilância</p>
+    </footer>
 
-    <form id="form">
-      <input type="hidden" id="notaEscolhida" name="nota">
+    <script>
+        const notas = document.querySelectorAll('.nota');
+        const notaInput = document.getElementById('notaEscolhida');
+        const form = document.getElementById('form');
 
-      <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
-      <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
-
-      <label for="produtos">Selecione seu produto:</label>
-      <select id="produtos" name="produtos" multiple required>
-
-        <option value="Alarme Monitorado">Alarme Monitorado</option>
-        <option value="Câmeras de Segurança">Câmeras de Segurança</option>
-        <option value="Rastreador Veicular">Rastreador Veicular</option>
-        <option value="Vigilância/Portaria">Vigilância / Portaria</option>
-        <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
-      </select>
-
-      <textarea id="comentarios" name="comentarios" placeholder="Comentários (opcional)"></textarea>
-      <button type="submit">Enviar Avaliação</button>
-    </form>
-  </div>
-
-  <footer>
-    <p>Monitoramento 24h • Segurança Residencial e Empresarial<br>
-      © 2025 Vegas Vigilância</p>
-  </footer>
-  <script>
-    const notas = document.querySelectorAll('.nota');
-    const notaInput = document.getElementById('notaEscolhida');
-    const form = document.getElementById('form');
-
-    notas.forEach(nota => {
-      nota.addEventListener('click', () => {
-        notas.forEach(n => n.classList.remove('selected'));
-        nota.classList.add('selected');
-        notaInput.value = nota.dataset.value;
-      });
-    });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const nota = document.getElementById('notaEscolhida').value;
-      if (!nota) {
-        alert("Por favor, selecione uma nota antes de enviar o formulário.");
-        return;
-      }
-
-      // 1. Captura os produtos selecionados e cria a string separada por vírgula
-      const produtosSelecionados = Array.from(document.getElementById('produtos').selectedOptions)
-        .map(opt => opt.value)
-        .join(", ");
-
-      // Este é o código JS que você já estava usando:
-      // ...
-      // 2. Prepara o envio com FormData
-      const formData = new FormData();
-      formData.append("nota", notaInput.value);
-      formData.append("nome", document.getElementById('nome').value);
-      formData.append("telefone", document.getElementById('telefone').value);
-      formData.append("produtos", produtosSelecionados); // O campo 'produtos' está sendo anexado aqui!
-      formData.append("comentarios", document.getElementById('comentarios').value);
-      // ...
-
-
-      // ATENÇÃO: CERTIFIQUE-SE DE QUE ESTA É A URL CORRETA DO SEU DEPLOY
-      const urlAppsScript = "https://script.google.com/macros/s/AKfycbyiGedsPHMibL87lObnRy_nKfHWxhhIOd1gJG14A1fkilz9Mw9dCGaJsxciYsbMIfZGbA/exec";
-
-      // 3. Envia os dados como JSON
-      fetch(urlAppsScript, {
-        method: "POST",
-        // Define o tipo de conteúdo como JSON
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // Converte o objeto JavaScript para uma string JSON
-        body: JSON.stringify(dadosParaEnviar)
-      })
-        .then(res => res.text())
-        .then(data => {
-          alert("Avaliação enviada com sucesso!");
-          form.reset();
-          notas.forEach(n => n.classList.remove('selected'));
-        })
-        .catch(err => {
-          console.error("Erro ao enviar:", err);
-          alert("Erro ao enviar. Verifique sua conexão.");
+        notas.forEach(nota => {
+            nota.addEventListener('click', () => {
+                notas.forEach(n => n.classList.remove('selected'));
+                nota.classList.add('selected');
+                notaInput.value = nota.dataset.value;
+            });
         });
-    });
-  </script>
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const produtosSelecionados = Array.from(document.getElementById('produtos').selectedOptions)
+                .map(opt => opt.value)
+                .join(", ");
+            const nota = document.getElementById('notaEscolhida').value;
+            if (!nota) {
+                alert("Por favor, selecione uma nota antes de enviar o formulário.");
+                return;
+            }
+
+            const formData = new FormData();
+            // Ordem de adição não importa aqui, mas o NOME (key) sim.
+            formData.append("nota", notaInput.value);
+            formData.append("nome", document.getElementById('nome').value);
+            formData.append("telefone", document.getElementById('telefone').value);
+            formData.append("produtos", produtosSelecionados); // Campo 'produtos'
+            formData.append("comentarios", document.getElementById('comentarios').value);
+
+            // A URL DEVE SER A QUE VOCÊ GEROU NA IMPLANTAÇÃO DO SEU APPS SCRIPT
+            const urlAppsScript = "https://script.google.com/macros/s/AKfycbyiGedsPHMibL87lObnRy_nKfHWxhhIOd1gJG14A1fkilz9Mw9dCGaJsxciYsbMIfZGbA/exec";
+            
+            fetch(urlAppsScript, {
+                method: "POST",
+                body: formData
+            })
+            .then(res => res.text())
+            .then(data => {
+                alert("Avaliação enviada com sucesso!");
+                form.reset();
+                notas.forEach(n => n.classList.remove('selected'));
+            })
+            .catch(err => {
+                console.error("Erro ao enviar:", err);
+                alert("Erro ao enviar. Verifique sua conexão.");
+            });
+        });
+    </script>
 </body>
 
 </html>
