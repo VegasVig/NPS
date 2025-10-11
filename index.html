@@ -1,310 +1,205 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NPS Vegas Vigilância</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard NPS - Vegas Vigilância</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
 
-        body {
-            background-color: #000;
-            color: white;
-        }
+    body {
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
 
-        header {
-            background: #0a0a0a;
-            color: #fff;
-            padding: 15px 25px;
-            text-align: center;
-            border-bottom: 2px solid #5f6463;
-        }
+    header {
+      background: linear-gradient(90deg, #333, #000);
+      padding: 20px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
 
-        header img {
-            width: 100%;
-            height: 60%;
-        }
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+      background: #1a1a1a;
+    }
 
-        .container {
-            max-width: 550px;
-            margin: 20px auto;
-            background: #111;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0px 0px 12px rgba(0, 255, 204, 0.15);
-            text-align: center;
-        }
+    .top-bar input, .top-bar select {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      outline: none;
+    }
 
-        .container h2 {
-            margin-bottom: 10px;
-            font-size: 22px;
-            color: #f8fbfa;
-        }
+    .top-bar input {
+      width: 220px;
+    }
 
-        .container p {
-            font-size: 15px;
-            color: white;
-            margin-bottom: 20px;
-        }
+    main {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+    }
 
-        .notas {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            margin-bottom: 10px;
-            flex-wrap: nowrap;
-        }
+    .card {
+      background: #1f1f1f;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-        .nota {
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            color: #000;
-            user-select: none;
-            transition: transform 0.2s, opacity 0.2s;
-        }
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    }
 
-        .nota[data-value="0"],
-        .nota[data-value="1"],
-        .nota[data-value="2"] {
-            background: #ff4d4d;
-        }
+    .nota {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
 
-        .nota[data-value="3"],
-        .nota[data-value="4"] {
-            background: #ff6a00;
-        }
+    .comentario {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
 
-        .nota[data-value="5"],
-        .nota[data-value="6"] {
-            background: #ffcc00;
-        }
+    .extras {
+      font-size: 0.9rem;
+      color: #999;
+      margin-top: 10px;
+      border-top: 1px solid #333;
+      padding-top: 8px;
+    }
 
-        .nota[data-value="7"],
-        .nota[data-value="8"] {
-            background: #c6ff00;
-        }
+    .footer {
+      text-align: center;
+      padding: 15px;
+      background: #1a1a1a;
+      color: #777;
+      font-size: 0.9rem;
+      margin-top: 30px;
+    }
 
-        .nota[data-value="9"],
-        .nota[data-value="10"] {
-            background: #4CAF50;
-        }
-
-        .nota.selected {
-            outline: 3px solid #464a49;
-            transform: scale(1.1);
-        }
-
-        .legendas {
-            display: flex;
-            justify-content: center;
-            font-size: 11px;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .legenda {
-            text-align: center;
-            width: 20%;
-            padding: 2px;
-        }
-
-        .legenda:nth-child(1) {
-            color: #ff4d4d;
-        }
-
-        .legenda:nth-child(2) {
-            color: #ff6a00;
-        }
-
-        .legenda:nth-child(3) {
-            color: #ffcc00;
-        }
-
-        .legenda:nth-child(4) {
-            color: #c6ff00;
-        }
-
-        .legenda:nth-child(5) {
-            color: #4CAF50;
-        }
-
-        form {
-            color: white;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            text-align: left;
-        }
-
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #333;
-            border-radius: 6px;
-            background: #1a1a1a;
-            color: white;
-            font-size: 14px;
-        }
-
-        textarea {
-            resize: none;
-            min-height: 80px;
-        }
-
-        label {
-            font-size: 14px;
-            color: white;
-            font-weight: bold;
-        }
-
-        button {
-            background: #404342;
-            color: #000;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #3f4242;
-        }
-
-        footer {
-            background: #0a0a0a;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 40px;
-            font-size: 13px;
-        }
-    </style>
+    /* Cores por nota */
+    .n1, .n2 { background: #ff2b2b; color: #fff; }
+    .n3, .n4 { background: #ff6f00; color: #fff; }
+    .n5, .n6 { background: #ffd600; color: #000; }
+    .n7, .n8 { background: #64dd17; color: #000; }
+    .n9, .n10 { background: #00c853; color: #fff; }
+  </style>
 </head>
-
 <body>
-    <header>
-        <img src="./assets/logovegas.jpg" alt="Logo Vegas Vigilância">
-    </header>
+  <header>Dashboard de Satisfação - Vegas Vigilância</header>
 
-    <div class="container">
-        <h2>Sua opinião faz a diferença</h2>
-        <p>De 1 a 10, o quanto você indicaria a Vegas Vigilância para um amigo?</p>
+  <div class="top-bar">
+    <input type="text" id="buscaNome" placeholder="🔍 Buscar por nome...">
+    <input type="text" id="buscaProduto" placeholder="🔍 Buscar por produto...">
+    <select id="filtroNota">
+      <option value="">Filtrar por nota</option>
+      ${[...Array(11).keys()].map(n => `<option value="${n}">${n}</option>`).join("")}
+    </select>
+  </div>
 
-        <div class="notas" id="notas">
-            <div class="nota" data-value="1">1</div>
-            <div class="nota" data-value="2">2</div>
-            <div class="nota" data-value="3">3</div>
-            <div class="nota" data-value="4">4</div>
-            <div class="nota" data-value="5">5</div>
-            <div class="nota" data-value="6">6</div>
-            <div class="nota" data-value="7">7</div>
-            <div class="nota" data-value="8">8</div>
-            <div class="nota" data-value="9">9</div>
-            <div class="nota" data-value="10">10</div>
-        </div>
+  <main id="cardsContainer">
+    <p style="text-align:center; color:#888;">Carregando respostas...</p>
+  </main>
 
-        <div class="legendas">
-            <div class="legenda">Muito<br>Insatisfeito</div>
-            <div class="legenda">Insatisfeito</div>
-            <div class="legenda">Nem satisfeito<br>nem insatisfeito</div>
-            <div class="legenda">Satisfeito</div>
-            <div class="legenda">Totalmente<br>Satisfeito</div>
-        </div>
+  <div class="footer">© 2025 Vegas Vigilância - Dashboard NPS</div>
 
-        <form id="form">
-            <input type="hidden" id="notaEscolhida" name="nota">
+  <script>
+    const API_URL = "PASTE_AQUI_SUA_URL_DO_APPS_SCRIPT"; // <<<< substitua aqui
 
-            <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
-            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+    let respostasOriginais = [];
 
-            <label for="produtos">Selecione seu produto:</label>
-            <select id="produtos" name="produtos" >
-                <option value="Alarme Monitorado">Alarme Monitorado</option>
-                <option value="Câmeras de Segurança">Câmeras de Segurança</option>
-                <option value="Rastreador Veicular">Rastreador Veicular</option>
-                <option value="Vigilância/Portaria">Vigilância / Portaria</option>
-                <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
-            </select>
+    async function carregarRespostas() {
+      try {
+        const res = await fetch(API_URL);
+        const dados = await res.json();
 
-            <textarea id="comentarios" name="comentarios" placeholder="Comentários (opcional)"></textarea>
-            <button type="submit">Enviar Avaliação</button>
-        </form>
-    </div>
+        respostasOriginais = dados.reverse().map(item => ({
+          nota: Number(item.nota),
+          nome: item.nome?.trim() || "Sem nome",
+          telefone: item.telefone || "-",
+          produtos: item.produtos || "Não informado",
+          comentarios: item.comentarios || "Sem comentário"
+        }));
 
-    <footer>
-        <p>Monitoramento 24h • Segurança Residencial e Empresarial<br>
-            © 2025 Vegas Vigilância</p>
-    </footer>
+        preencherComentarios(respostasOriginais);
+      } catch (err) {
+        document.getElementById("cardsContainer").innerHTML =
+          `<p style="color:red;text-align:center;">Erro ao carregar dados: ${err}</p>`;
+      }
+    }
 
-    <script>
-        const notas = document.querySelectorAll('.nota');
-        const notaInput = document.getElementById('notaEscolhida');
-        const form = document.getElementById('form');
+    function preencherComentarios(lista) {
+      const container = document.getElementById("cardsContainer");
+      container.innerHTML = "";
 
-        notas.forEach(nota => {
-            nota.addEventListener('click', () => {
-                notas.forEach(n => n.classList.remove('selected'));
-                nota.classList.add('selected');
-                notaInput.value = nota.dataset.value;
-            });
-        });
+      if (lista.length === 0) {
+        container.innerHTML = `<p style="text-align:center;color:#888;">Nenhum resultado encontrado.</p>`;
+        return;
+      }
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
+      lista.forEach(r => {
+        const div = document.createElement("div");
+        div.classList.add("card");
+        div.innerHTML = `
+          <div class="nota n${r.nota}">${r.nota}</div>
+          <strong>${r.nome}</strong>
+          <div class="comentario">${r.comentarios}</div>
+          <div class="extras">
+            Tel: ${r.telefone}<br>
+            Produto(s): ${r.produtos}
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
 
-            const produtosSelecionados = Array.from(document.getElementById('produtos').selectedOptions)
-                .map(opt => opt.value)
-                .join(", ");
-            const nota = document.getElementById('notaEscolhida').value;
-            if (!nota) {
-                alert("Por favor, selecione uma nota antes de enviar o formulário.");
-                return;
-            }
+    function aplicarFiltros() {
+      const nomeFiltro = document.getElementById("buscaNome").value.toLowerCase();
+      const produtoFiltro = document.getElementById("buscaProduto").value.toLowerCase();
+      const notaFiltro = document.getElementById("filtroNota").value;
 
-            const formData = new FormData();
-            // Ordem de adição não importa aqui, mas o NOME (key) sim.
-            formData.append("nota", notaInput.value);
-            formData.append("nome", document.getElementById('nome').value);
-            formData.append("telefone", document.getElementById('telefone').value);
-            formData.append("produtos", produtosSelecionados); // Campo 'produtos'
-            formData.append("comentarios", document.getElementById('comentarios').value);
+      let filtradas = respostasOriginais;
 
-            // A URL DEVE SER A QUE VOCÊ GEROU NA IMPLANTAÇÃO DO SEU APPS SCRIPT
-            const urlAppsScript = "https://script.google.com/macros/s/AKfycbyiGedsPHMibL87lObnRy_nKfHWxhhIOd1gJG14A1fkilz9Mw9dCGaJsxciYsbMIfZGbA/exec";
-            
-            fetch(urlAppsScript, {
-                method: "POST",
-                body: formData
-            })
-            .then(res => res.text())
-            .then(data => {
-                alert("Avaliação enviada com sucesso!");
-                form.reset();
-                notas.forEach(n => n.classList.remove('selected'));
-            })
-            .catch(err => {
-                console.error("Erro ao enviar:", err);
-                alert("Erro ao enviar. Verifique sua conexão.");
-            });
-        });
-    </script>
+      if (nomeFiltro)
+        filtradas = filtradas.filter(r => r.nome.toLowerCase().includes(nomeFiltro));
+
+      if (produtoFiltro)
+        filtradas = filtradas.filter(r => r.produtos.toLowerCase().includes(produtoFiltro));
+
+      if (notaFiltro !== "")
+        filtradas = filtradas.filter(r => r.nota == notaFiltro);
+
+      preencherComentarios(filtradas);
+    }
+
+    document.getElementById("buscaNome").addEventListener("input", aplicarFiltros);
+    document.getElementById("buscaProduto").addEventListener("input", aplicarFiltros);
+    document.getElementById("filtroNota").addEventListener("change", aplicarFiltros);
+
+    carregarRespostas();
+  </script>
 </body>
-
 </html>
