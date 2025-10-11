@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,11 +75,31 @@
       transition: transform 0.2s, opacity 0.2s;
     }
 
-    .nota[data-value="0"], .nota[data-value="1"], .nota[data-value="2"] { background: #ff4d4d; }
-    .nota[data-value="3"], .nota[data-value="4"] { background: #ff6a00; }
-    .nota[data-value="5"], .nota[data-value="6"] { background: #ffcc00; }
-    .nota[data-value="7"], .nota[data-value="8"] { background: #c6ff00; }
-    .nota[data-value="9"], .nota[data-value="10"] { background: #4CAF50; }
+    .nota[data-value="0"],
+    .nota[data-value="1"],
+    .nota[data-value="2"] {
+      background: #ff4d4d;
+    }
+
+    .nota[data-value="3"],
+    .nota[data-value="4"] {
+      background: #ff6a00;
+    }
+
+    .nota[data-value="5"],
+    .nota[data-value="6"] {
+      background: #ffcc00;
+    }
+
+    .nota[data-value="7"],
+    .nota[data-value="8"] {
+      background: #c6ff00;
+    }
+
+    .nota[data-value="9"],
+    .nota[data-value="10"] {
+      background: #4CAF50;
+    }
 
     .nota.selected {
       outline: 3px solid #464a49;
@@ -99,11 +120,25 @@
       padding: 2px;
     }
 
-    .legenda:nth-child(1) { color: #ff4d4d; }
-    .legenda:nth-child(2) { color: #ff6a00; }
-    .legenda:nth-child(3) { color: #ffcc00; }
-    .legenda:nth-child(4) { color: #c6ff00; }
-    .legenda:nth-child(5) { color: #4CAF50; }
+    .legenda:nth-child(1) {
+      color: #ff4d4d;
+    }
+
+    .legenda:nth-child(2) {
+      color: #ff6a00;
+    }
+
+    .legenda:nth-child(3) {
+      color: #ffcc00;
+    }
+
+    .legenda:nth-child(4) {
+      color: #c6ff00;
+    }
+
+    .legenda:nth-child(5) {
+      color: #4CAF50;
+    }
 
     form {
       color: white;
@@ -113,7 +148,9 @@
       text-align: left;
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       width: 100%;
       padding: 10px;
       border: 1px solid #333;
@@ -160,6 +197,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <img src="./assets/logovegas.jpg" alt="Logo Vegas Vigilância">
@@ -215,7 +253,7 @@
 
   <footer>
     <p>Monitoramento 24h • Segurança Residencial e Empresarial<br>
-    © 2025 Vegas Vigilância</p>
+      © 2025 Vegas Vigilância</p>
   </footer>
 
   <script>
@@ -237,6 +275,11 @@
       const produtosSelecionados = Array.from(document.getElementById('produtos').selectedOptions)
         .map(opt => opt.value)
         .join(", ");
+      const nota = document.getElementById('notaEscolhida').value;
+      if (!nota) {
+        alert("Por favor, selecione uma nota antes de enviar o formulário.");
+        return; // impede o envio
+      }
 
       const formData = new FormData();
       formData.append("nota", notaInput.value);
@@ -249,17 +292,18 @@
         method: "POST",
         body: formData
       })
-      .then(res => res.text())
-      .then(data => {
-        alert("Avaliação enviada com sucesso!");
-        form.reset();
-        notas.forEach(n => n.classList.remove('selected'));
-      })
-      .catch(err => {
-        console.error("Erro ao enviar:", err);
-        alert("Erro ao enviar. Verifique sua conexão.");
-      });
+        .then(res => res.text())
+        .then(data => {
+          alert("Avaliação enviada com sucesso!");
+          form.reset();
+          notas.forEach(n => n.classList.remove('selected'));
+        })
+        .catch(err => {
+          console.error("Erro ao enviar:", err);
+          alert("Erro ao enviar. Verifique sua conexão.");
+        });
     });
   </script>
 </body>
+
 </html>
