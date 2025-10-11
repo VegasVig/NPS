@@ -191,22 +191,23 @@
     </div>
 
     <form id="form">
-      <input type="hidden" id="notaEscolhida" name="notaEscolhida">
-      <input type="text" id="nome" placeholder="Nome completo" required>
-      <input type="tel" id="telefone" placeholder="(00) 00000-0000" required>
+      <!-- Corrigido: agora o name é 'nota' -->
+      <input type="hidden" id="notaEscolhida" name="nota">
 
-     <label for="produtos"></label>
-<select id="produtos" name="produtos" multiple required>
-  <option disabled selected>Selecione seu produto</option>
-  <option value="Alarme Monitorado">Alarme Monitorado</option>
-  <option value="Câmeras de Segurança">Câmeras de Segurança</option>
-  <option value="Rastreador Veicular">Rastreador Veicular</option>
-  <option value="Vigilância/Portaria">Vigilância / Portaria</option>
-  <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
-</select>
+      <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+      <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
 
+      <label for="produtos">Selecione seu produto:</label>
+      <select id="produtos" name="produtos" multiple required>
+        <option disabled selected>Selecione seu produto</option>
+        <option value="Alarme Monitorado">Alarme Monitorado</option>
+        <option value="Câmeras de Segurança">Câmeras de Segurança</option>
+        <option value="Rastreador Veicular">Rastreador Veicular</option>
+        <option value="Vigilância/Portaria">Vigilância / Portaria</option>
+        <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
+      </select>
 
-      <textarea id="comentarios" placeholder="Comentários (opcional)"></textarea>
+      <textarea id="comentarios" name="comentarios" placeholder="Comentários (opcional)"></textarea>
       <button type="submit">Enviar Avaliação</button>
     </form>
   </div>
@@ -237,7 +238,7 @@
         .join(", ");
 
       const formData = new FormData();
-      formData.append("nota", document.getElementById('notaEscolhida').value);
+      formData.append("nota", notaInput.value);
       formData.append("nome", document.getElementById('nome').value);
       formData.append("telefone", document.getElementById('telefone').value);
       formData.append("produtos", produtosSelecionados);
@@ -246,16 +247,17 @@
       fetch("https://script.google.com/macros/s/AKfycbyiGedsPHMibL87lObnRy_nKfHWxhhIOd1gJG14A1fkilz9Mw9dCGaJsxciYsbMIfZGbA/exec", {
         method: "POST",
         body: formData
-      }).then(res => res.text())
-        .then(data => {
-          alert("Avaliação enviada com sucesso!");
-          form.reset();
-          notas.forEach(n => n.classList.remove('selected'));
-        })
-        .catch(err => {
-          console.error("Erro ao enviar:", err);
-          alert("Erro ao enviar. Verifique sua conexão.");
-        });
+      })
+      .then(res => res.text())
+      .then(data => {
+        alert("Avaliação enviada com sucesso!");
+        form.reset();
+        notas.forEach(n => n.classList.remove('selected'));
+      })
+      .catch(err => {
+        console.error("Erro ao enviar:", err);
+        alert("Erro ao enviar. Verifique sua conexão.");
+      });
     });
   </script>
 </body>
