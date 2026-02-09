@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NPS-Vegas-Vigilância</title>
-
   <style>
     * {
       margin: 0;
@@ -21,6 +20,7 @@
 
     header {
       background: #0a0a0a;
+      color: #fff;
       padding: 15px 25px;
       text-align: center;
       border-bottom: 2px solid #5f6463;
@@ -41,11 +41,24 @@
       text-align: center;
     }
 
+    .container h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      color: #f8fbfa;
+    }
+
+    .container p {
+      font-size: 15px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
     .notas {
       display: flex;
       justify-content: center;
       gap: 5px;
       margin-bottom: 10px;
+      flex-wrap: nowrap;
     }
 
     .nota {
@@ -58,67 +71,125 @@
       cursor: pointer;
       font-weight: bold;
       color: #000;
+      user-select: none;
+      transition: transform 0.2s, opacity 0.2s;
     }
 
+    .nota[data-value="0"],
     .nota[data-value="1"],
-    .nota[data-value="2"],
-    .nota[data-value="3"] { background: #ff4d4d; }
+    .nota[data-value="2"] {
+      background: #ff4d4d;
+    }
 
-    .nota[data-value="4"],
+    .nota[data-value="3"],
+    .nota[data-value="4"] {
+      background: #ff6a00;
+    }
+
     .nota[data-value="5"],
-    .nota[data-value="6"] { background: #ffcc00; }
+    .nota[data-value="6"] {
+      background: #ffcc00;
+    }
 
     .nota[data-value="7"],
-    .nota[data-value="8"] { background: #c6ff00; }
+    .nota[data-value="8"] {
+      background: #c6ff00;
+    }
 
     .nota[data-value="9"],
-    .nota[data-value="10"] { background: #4CAF50; }
+    .nota[data-value="10"] {
+      background: #4CAF50;
+    }
 
     .nota.selected {
       outline: 3px solid #464a49;
       transform: scale(1.1);
     }
 
+    .legendas {
+      display: flex;
+      justify-content: center;
+      font-size: 11px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .legenda {
+      text-align: center;
+      width: 20%;
+      padding: 2px;
+    }
+
+    .legenda:nth-child(1) {
+      color: #ff4d4d;
+    }
+
+    .legenda:nth-child(2) {
+      color: #ff6a00;
+    }
+
+    .legenda:nth-child(3) {
+      color: #ffcc00;
+    }
+
+    .legenda:nth-child(4) {
+      color: #c6ff00;
+    }
+
+    .legenda:nth-child(5) {
+      color: #4CAF50;
+    }
+
     form {
+      color: white;
       display: flex;
       flex-direction: column;
       gap: 15px;
       text-align: left;
-      margin-top: 20px;
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       width: 100%;
       padding: 10px;
+      border: 1px solid #333;
       border-radius: 6px;
       background: #1a1a1a;
       color: white;
-      border: 1px solid #333;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: none;
+      min-height: 80px;
+    }
+
+    label {
+      font-size: 14px;
+      color: white;
+      font-weight: bold;
     }
 
     button {
-      background: #00ffcc;
+      background: #404342;
       color: #000;
       padding: 12px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      font-size: 16px;
       font-weight: bold;
+      transition: background 0.3s;
     }
 
-    .agradecimento {
-      display: none;
-      text-align: center;
-      padding: 40px;
-    }
-
-    .agradecimento h2 {
-      color: #00ffcc;
-      margin-bottom: 10px;
+    button:hover {
+      background: #3f4242;
     }
 
     footer {
       background: #0a0a0a;
+      color: white;
       text-align: center;
       padding: 15px;
       margin-top: 40px;
@@ -128,113 +199,111 @@
 </head>
 
 <body>
+  <header>
+    <img src="./assets/logovegas.jpg" alt="Logo Vegas Vigilância">
+  </header>
 
-<header>
-  <img src="./assets/logovegas.jpg" alt="Logo Vegas Vigilância">
-</header>
+  <div class="container">
+    <h2>Sua opinião faz a diferença</h2>
+    <p>De 1 a 10, o quanto você indicaria a Vegas Vigilância para um amigo?</p>
 
-<div class="container" id="formContainer">
+    <div class="notas" id="notas">
+      <div class="nota" data-value="1">1</div>
+      <div class="nota" data-value="2">2</div>
+      <div class="nota" data-value="3">3</div>
+      <div class="nota" data-value="4">4</div>
+      <div class="nota" data-value="5">5</div>
+      <div class="nota" data-value="6">6</div>
+      <div class="nota" data-value="7">7</div>
+      <div class="nota" data-value="8">8</div>
+      <div class="nota" data-value="9">9</div>
+      <div class="nota" data-value="10">10</div>
+    </div>
 
-  <h2>Sua opinião faz a diferença</h2>
-  <p>De 1 a 10, o quanto você indicaria a Vegas Vigilância?</p>
+    <div class="legendas">
+      <div class="legenda">Muito<br>Insatisfeito</div>
+      <div class="legenda">Insatisfeito</div>
+      <div class="legenda">Nem satisfeito<br>nem insatisfeito</div>
+      <div class="legenda">Satisfeito</div>
+      <div class="legenda">Totalmente<br>Satisfeito</div>
+    </div>
 
-  <div class="notas">
-    <div class="nota" data-value="1">1</div>
-    <div class="nota" data-value="2">2</div>
-    <div class="nota" data-value="3">3</div>
-    <div class="nota" data-value="4">4</div>
-    <div class="nota" data-value="5">5</div>
-    <div class="nota" data-value="6">6</div>
-    <div class="nota" data-value="7">7</div>
-    <div class="nota" data-value="8">8</div>
-    <div class="nota" data-value="9">9</div>
-    <div class="nota" data-value="10">10</div>
+    <form id="form">
+      <!-- Corrigido: agora o name é 'nota' -->
+      <input type="hidden" id="notaEscolhida" name="nota">
+
+      <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+      <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+
+      <label for="produtos">Selecione seu produto:</label>
+      <select id="produtos" multiple required>
+
+       
+        <option value="Alarme Monitorado">Alarme Monitorado</option>
+        <option value="Câmeras de Segurança">Câmeras de Segurança</option>
+        <option value="Rastreador Veicular">Rastreador Veicular</option>
+        <option value="Vigilância/Portaria">Vigilância / Portaria</option>
+        <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
+      </select>
+
+      <textarea id="comentarios" name="comentarios" placeholder="Comentários (opcional)"></textarea>
+      <button type="submit">Enviar Avaliação</button>
+    </form>
   </div>
 
-  <form id="form">
-    <input type="hidden" id="notaEscolhida" name="nota">
+  <footer>
+    <p>Monitoramento 24h • Segurança Residencial e Empresarial<br>
+      © 2025 Vegas Vigilância</p>
+  </footer>
 
-    <input type="text" id="nome" name="nome" placeholder="Nome completo" required pattern="[A-Za-zÀ-ÿ\s]+">
-    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+  <script>
+    const notas = document.querySelectorAll('.nota');
+    const notaInput = document.getElementById('notaEscolhida');
+    const form = document.getElementById('form');
 
-    <label>Selecione seu produto:</label>
-    <select id="produtos" multiple required>
-      <option>Alarme Monitorado</option>
-      <option>Câmeras de Segurança</option>
-      <option>Rastreador Veicular</option>
-      <option>Vigilância / Portaria</option>
-      <option>Bombeiro / Limpeza</option>
-    </select>
-
-    <textarea id="comentarios" placeholder="Comentários"></textarea>
-
-    <button type="submit">Enviar Avaliação</button>
-  </form>
-</div>
-
-<div class="container agradecimento" id="agradecimento">
-  <h2>Obrigado pela sua avaliação! 🙏</h2>
-  <p>Sua opinião é muito importante para melhorarmos nossos serviços.</p>
-</div>
-
-<footer>
-  © 2025 Vegas Vigilância
-</footer>
-
-<script>
-  const notas = document.querySelectorAll('.nota');
-  const notaInput = document.getElementById('notaEscolhida');
-  const form = document.getElementById('form');
-
-  notas.forEach(nota => {
-    nota.addEventListener('click', () => {
-      notas.forEach(n => n.classList.remove('selected'));
-      nota.classList.add('selected');
-      notaInput.value = nota.dataset.value;
-    });
-  });
-
-  // BLOQUEAR NÚMEROS NO NOME
-  document.getElementById('nome').addEventListener('input', function () {
-    this.value = this.value.replace(/[0-9]/g, '');
-  });
-
-  // TELEFONE SÓ NÚMEROS
-  document.getElementById('telefone').addEventListener('input', function () {
-    this.value = this.value.replace(/[^0-9()-\s]/g, '');
-  });
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    if (!notaInput.value) {
-      alert("Selecione uma nota");
-      return;
-    }
-
-    const produtosSelecionados = Array.from(document.getElementById('produtos').selectedOptions)
-      .map(opt => opt.value).join(", ");
-
-    const formData = new FormData();
-    formData.append("nota", notaInput.value);
-    formData.append("nome", document.getElementById('nome').value);
-    formData.append("telefone", document.getElementById('telefone').value);
-    formData.append("produtos", produtosSelecionados);
-    formData.append("comentarios", document.getElementById('comentarios').value);
-
-    fetch("https://script.google.com/macros/s/AKfycbyiGedsPHMibL87lObnRy_nKfHWxhhIOd1gJG14A1fkilz9Mw9dCGaJsxciYsbMIfZGbA/exec", {
-      method: "POST",
-      body: formData
-    })
-      .then(() => {
-        document.getElementById('formContainer').style.display = 'none';
-        document.getElementById('agradecimento').style.display = 'block';
-      })
-      .catch(() => {
-        alert("Erro ao enviar.");
+    notas.forEach(nota => {
+      nota.addEventListener('click', () => {
+        notas.forEach(n => n.classList.remove('selected'));
+        nota.classList.add('selected');
+        notaInput.value = nota.dataset.value;
       });
-  });
-</script>
+    });
 
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const produtosSelecionados = Array.from(document.getElementById('produtos').selectedOptions)
+        .map(opt => opt.value)
+        .join(", ");
+      const nota = document.getElementById('notaEscolhida').value;
+      if (!nota) {
+        alert("Por favor, selecione uma nota antes de enviar o formulário.");
+        return; // impede o envio
+      }
+
+      const formData = new FormData();
+      formData.append("nota", notaInput.value);
+      formData.append("nome", document.getElementById('nome').value);
+      formData.append("telefone", document.getElementById('telefone').value);
+      formData.append("produtos", produtosSelecionados);
+      formData.append("comentarios", document.getElementById('comentarios').value);
+
+      fetch("https://script.google.com/macros/s/AKfycbyiGedsPHMibL87lObnRy_nKfHWxhhIOd1gJG14A1fkilz9Mw9dCGaJsxciYsbMIfZGbA/exec", {
+        method: "POST",
+        body: formData
+      })
+        .then(res => res.text())
+        .then(data => {
+          alert("Avaliação enviada com sucesso!");
+          form.reset();
+          notas.forEach(n => n.classList.remove('selected'));
+        })
+        .catch(err => {
+          console.error("Erro ao enviar:", err);
+          alert("Erro ao enviar. Verifique sua conexão.");
+        });
+    });
+  </script>
 </body>
+
 </html>
