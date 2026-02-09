@@ -77,29 +77,19 @@
 
     .nota[data-value="0"],
     .nota[data-value="1"],
-    .nota[data-value="2"] {
-      background: #ff4d4d;
-    }
+    .nota[data-value="2"] { background: #ff4d4d; }
 
     .nota[data-value="3"],
-    .nota[data-value="4"] {
-      background: #ff6a00;
-    }
+    .nota[data-value="4"] { background: #ff6a00; }
 
     .nota[data-value="5"],
-    .nota[data-value="6"] {
-      background: #ffcc00;
-    }
+    .nota[data-value="6"] { background: #ffcc00; }
 
     .nota[data-value="7"],
-    .nota[data-value="8"] {
-      background: #c6ff00;
-    }
+    .nota[data-value="8"] { background: #c6ff00; }
 
     .nota[data-value="9"],
-    .nota[data-value="10"] {
-      background: #4CAF50;
-    }
+    .nota[data-value="10"] { background: #4CAF50; }
 
     .nota.selected {
       outline: 3px solid #464a49;
@@ -228,14 +218,13 @@
       </select>
 
       <textarea id="comentarios" name="comentarios" placeholder="Comentários (opcional)"></textarea>
-      <button type="submit">Enviar Avaliação</button>
+      <button type="submit" id="btnEnviar">Enviar Avaliação</button>
     </form>
 
     <div id="agradecimento" style="display:none; text-align:center; margin-top:20px;">
       <h2>Obrigado pela sua avaliação!</h2>
       <p>Sua opinião é muito importante para nós.</p>
     </div>
-
   </div>
 
   <footer>
@@ -247,6 +236,8 @@
     const notas = document.querySelectorAll('.nota');
     const notaInput = document.getElementById('notaEscolhida');
     const form = document.getElementById('form');
+    const btnEnviar = document.getElementById('btnEnviar');
+    let enviando = false;
 
     notas.forEach(nota => {
       nota.addEventListener('click', () => {
@@ -269,9 +260,18 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
+      if (enviando) return;
+      enviando = true;
+
+      btnEnviar.disabled = true;
+      btnEnviar.innerText = "Enviando...";
+
       const nota = notaInput.value;
       if (!nota) {
         alert("Por favor, selecione uma nota antes de enviar o formulário.");
+        enviando = false;
+        btnEnviar.disabled = false;
+        btnEnviar.innerText = "Enviar Avaliação";
         return;
       }
 
@@ -295,7 +295,10 @@
           document.getElementById('form').style.display = 'none';
           document.getElementById('agradecimento').style.display = 'block';
         })
-        .catch(err => {
+        .catch(() => {
+          enviando = false;
+          btnEnviar.disabled = false;
+          btnEnviar.innerText = "Enviar Avaliação";
           alert("Erro ao enviar. Verifique sua conexão.");
         });
     });
@@ -303,3 +306,4 @@
 </body>
 
 </html>
+
