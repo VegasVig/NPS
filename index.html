@@ -120,25 +120,11 @@
       padding: 2px;
     }
 
-    .legenda:nth-child(1) {
-      color: #ff4d4d;
-    }
-
-    .legenda:nth-child(2) {
-      color: #ff6a00;
-    }
-
-    .legenda:nth-child(3) {
-      color: #ffcc00;
-    }
-
-    .legenda:nth-child(4) {
-      color: #c6ff00;
-    }
-
-    .legenda:nth-child(5) {
-      color: #4CAF50;
-    }
+    .legenda:nth-child(1) { color: #ff4d4d; }
+    .legenda:nth-child(2) { color: #ff6a00; }
+    .legenda:nth-child(3) { color: #ffcc00; }
+    .legenda:nth-child(4) { color: #c6ff00; }
+    .legenda:nth-child(5) { color: #4CAF50; }
 
     form {
       color: white;
@@ -148,9 +134,7 @@
       text-align: left;
     }
 
-    input,
-    textarea,
-    select {
+    input, textarea, select {
       width: 100%;
       padding: 10px;
       border: 1px solid #333;
@@ -229,16 +213,13 @@
     </div>
 
     <form id="form">
-      <!-- Corrigido: agora o name é 'nota' -->
       <input type="hidden" id="notaEscolhida" name="nota">
 
-      <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+      <input type="text" id="nome" name="nome" placeholder="Nome completo" required pattern="[A-Za-zÀ-ÿ\s]+">
       <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
 
       <label for="produtos">Selecione seu produto:</label>
       <select id="produtos" multiple required>
-
-       
         <option value="Alarme Monitorado">Alarme Monitorado</option>
         <option value="Câmeras de Segurança">Câmeras de Segurança</option>
         <option value="Rastreador Veicular">Rastreador Veicular</option>
@@ -249,6 +230,12 @@
       <textarea id="comentarios" name="comentarios" placeholder="Comentários (opcional)"></textarea>
       <button type="submit">Enviar Avaliação</button>
     </form>
+
+    <div id="agradecimento" style="display:none; text-align:center; margin-top:20px;">
+      <h2>Obrigado pela sua avaliação!</h2>
+      <p>Sua opinião é muito importante para nós.</p>
+    </div>
+
   </div>
 
   <footer>
@@ -269,17 +256,28 @@
       });
     });
 
+    // bloquear números no nome
+    document.getElementById('nome').addEventListener('input', function () {
+      this.value = this.value.replace(/[0-9]/g, '');
+    });
+
+    // telefone só caracteres válidos
+    document.getElementById('telefone').addEventListener('input', function () {
+      this.value = this.value.replace(/[^0-9()-\s]/g, '');
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      const nota = notaInput.value;
+      if (!nota) {
+        alert("Por favor, selecione uma nota antes de enviar o formulário.");
+        return;
+      }
 
       const produtosSelecionados = Array.from(document.getElementById('produtos').selectedOptions)
         .map(opt => opt.value)
         .join(", ");
-      const nota = document.getElementById('notaEscolhida').value;
-      if (!nota) {
-        alert("Por favor, selecione uma nota antes de enviar o formulário.");
-        return; // impede o envio
-      }
 
       const formData = new FormData();
       formData.append("nota", notaInput.value);
@@ -293,13 +291,11 @@
         body: formData
       })
         .then(res => res.text())
-        .then(data => {
-          alert("Avaliação enviada com sucesso!");
-          form.reset();
-          notas.forEach(n => n.classList.remove('selected'));
+        .then(() => {
+          document.getElementById('form').style.display = 'none';
+          document.getElementById('agradecimento').style.display = 'block';
         })
         .catch(err => {
-          console.error("Erro ao enviar:", err);
           alert("Erro ao enviar. Verifique sua conexão.");
         });
     });
