@@ -1,244 +1,311 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NPS-Vegas-Vigilância</title>
+  <title>NPS - Vegas Vigilância</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --silver-bright: #ffffff;
+      --silver-main: #c0c0c0;
+      --silver-dark: #808080;
+      --bg-dark: #0a0a0c;
+      --glass-bg: rgba(30, 30, 35, 0.8);
+      --border-glass: rgba(192, 192, 192, 0.2);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
     }
 
     body {
-      background-color: #000;
-      color: white;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 50%, #1a1a1f 0%, #0a0a0c 100%),
+        linear-gradient(rgba(192, 192, 192, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(192, 192, 192, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
+      color: #e0e0e0;
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
-      background: #0a0a0a;
-      color: #fff;
-      padding: 15px 25px;
+      padding: 30px 20px;
       text-align: center;
-      border-bottom: 2px solid #5f6463;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
     }
 
     header img {
-      width: 100%;
-      height: 60%;
+      max-width: 300px;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
     }
 
     .container {
-      max-width: 550px;
+      max-width: 600px;
       margin: 20px auto;
-      background: #111;
-      padding: 30px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 40px;
       border-radius: 12px;
-      box-shadow: 0px 0px 12px rgba(0, 255, 204, 0.15);
+      border: 1px solid var(--border-glass);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(192, 192, 192, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--silver-main), var(--silver-bright), var(--silver-main), transparent);
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: var(--silver-bright);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
       text-align: center;
     }
 
-    .container h2 {
-      margin-bottom: 10px;
-      font-size: 22px;
-      color: #f8fbfa;
+    p {
+      font-size: 17px;
+      margin-bottom: 25px;
+      color: #a0a0a0;
+      text-align: center;
     }
 
-    .container p {
-      font-size: 15px;
-      color: white;
-      margin-bottom: 20px;
-    }
-
+    /* NOTAS COLORIDAS NPS */
     .notas {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       gap: 5px;
       margin-bottom: 10px;
-      flex-wrap: nowrap;
     }
 
     .nota {
-      width: 35px;
-      height: 35px;
+      flex: 1;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 6px;
+      border-radius: 4px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
       color: #000;
-      user-select: none;
-      transition: transform 0.2s, opacity 0.2s;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      border: 2px solid transparent;
     }
 
-    .nota[data-value="0"],
-    .nota[data-value="1"],
-    .nota[data-value="2"] { background: #ff4d4d; }
+    .nota[data-value="1"], .nota[data-value="2"] { background: #ff4d4d; }
+    .nota[data-value="3"], .nota[data-value="4"] { background: #ff6a00; }
+    .nota[data-value="5"], .nota[data-value="6"] { background: #ffcc00; }
+    .nota[data-value="7"], .nota[data-value="8"] { background: #c6ff00; }
+    .nota[data-value="9"], .nota[data-value="10"] { background: #4CAF50; }
 
-    .nota[data-value="3"],
-    .nota[data-value="4"] { background: #ff6a00; }
-
-    .nota[data-value="5"],
-    .nota[data-value="6"] { background: #ffcc00; }
-
-    .nota[data-value="7"],
-    .nota[data-value="8"] { background: #c6ff00; }
-
-    .nota[data-value="9"],
-    .nota[data-value="10"] { background: #4CAF50; }
-
-    .nota.selected {
-      outline: 3px solid #464a49;
-      transform: scale(1.1);
-    }
+    .nota:hover { transform: translateY(-2px); filter: brightness(1.2); }
+    .nota.selected { border-color: #fff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); transform: scale(1.05); }
 
     .legendas {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       font-size: 11px;
-      color: white;
-      margin-bottom: 20px;
+      color: var(--silver-dark);
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .legenda {
+    form { display: flex; flex-direction: column; gap: 20px; }
+
+    input[type="text"], input[type="tel"], textarea {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(192, 192, 192, 0.2);
+      border-radius: 4px;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+    }
+
+    /* AJUSTE DOS SERVIÇOS EM FILA (UM POR LINHA) */
+    .servicos-container { text-align: left; }
+    .servicos-label {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: var(--silver-main);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       text-align: center;
-      width: 20%;
-      padding: 2px;
     }
 
-    .legenda:nth-child(1) { color: #ff4d4d; }
-    .legenda:nth-child(2) { color: #ff6a00; }
-    .legenda:nth-child(3) { color: #ffcc00; }
-    .legenda:nth-child(4) { color: #c6ff00; }
-    .legenda:nth-child(5) { color: #4CAF50; }
-
-    form {
-      color: white;
+    .servicos-list {
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      text-align: left;
+      gap: 8px;
     }
 
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #333;
-      border-radius: 6px;
-      background: #1a1a1a;
-      color: white;
-      font-size: 14px;
-    }
+    .checkbox-interface input[type="checkbox"] { display: none; }
 
-    textarea {
-      resize: none;
-      min-height: 80px;
-    }
-
-    label {
-      font-size: 14px;
-      color: white;
-      font-weight: bold;
-    }
-
-    button {
-      background: #404342;
-      color: #000;
-      padding: 12px;
-      border: none;
+    .checkbox-interface span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(192, 192, 192, 0.1);
       border-radius: 6px;
       cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      transition: background 0.3s;
+      color: #a0a0a0;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.2s ease;
     }
 
-    button:hover {
-      background: #3f4242;
+    .checkbox-interface span:hover {
+      background: rgba(192, 192, 192, 0.05);
+      border-color: rgba(192, 192, 192, 0.3);
     }
+
+    .checkbox-interface input[type="checkbox"]:checked + span {
+      background: rgba(192, 192, 192, 0.15);
+      border-color: var(--silver-main);
+      color: var(--silver-bright);
+    }
+
+    .checkbox-interface span::after {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border: 1px solid rgba(192, 192, 192, 0.3);
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .checkbox-interface input[type="checkbox"]:checked + span::after {
+      content: '✓';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--silver-main);
+      color: #000;
+      border-color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    textarea { resize: none; min-height: 80px; }
+
+    button {
+      background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 50%, #808080 51%, #b0b0b0 100%);
+      color: #000;
+      padding: 15px;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 10px;
+    }
+
+    button:hover { filter: brightness(1.1); box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
 
     footer {
-      background: #0a0a0a;
-      color: white;
+      margin-top: auto;
+      padding: 30px;
       text-align: center;
-      padding: 15px;
-      margin-top: 40px;
       font-size: 13px;
+      color: #666;
+      border-top: 1px solid rgba(192, 192, 192, 0.05);
+    }
+
+    @media (max-width: 480px) {
+      .container { width: 95%; padding: 25px 15px; }
+      .nota { height: 35px; font-size: 12px; }
     }
   </style>
 </head>
-
 <body>
+
   <header>
     <img src="./assets/logovegas.jpg" alt="Logo Vegas Vigilância">
   </header>
 
   <div class="container">
-    <h2>Sua opinião faz a diferença</h2>
-    <p>De 1 a 10, o quanto você indicaria a Vegas Vigilância para um amigo?</p>
+    <h2>Sistema de Feedback</h2>
+    <p>O quanto você indicaria a Vegas para um parceiro?</p>
 
     <div class="notas" id="notas">
-      <div class="nota" data-value="1">1</div>
-      <div class="nota" data-value="2">2</div>
-      <div class="nota" data-value="3">3</div>
-      <div class="nota" data-value="4">4</div>
-      <div class="nota" data-value="5">5</div>
-      <div class="nota" data-value="6">6</div>
-      <div class="nota" data-value="7">7</div>
-      <div class="nota" data-value="8">8</div>
-      <div class="nota" data-value="9">9</div>
+      <div class="nota" data-value="1">01</div>
+      <div class="nota" data-value="2">02</div>
+      <div class="nota" data-value="3">03</div>
+      <div class="nota" data-value="4">04</div>
+      <div class="nota" data-value="5">05</div>
+      <div class="nota" data-value="6">06</div>
+      <div class="nota" data-value="7">07</div>
+      <div class="nota" data-value="8">08</div>
+      <div class="nota" data-value="9">09</div>
       <div class="nota" data-value="10">10</div>
     </div>
 
     <div class="legendas">
-      <div class="legenda">Muito<br>Insatisfeito</div>
-      <div class="legenda">Insatisfeito</div>
-      <div class="legenda">Nem satisfeito<br>nem insatisfeito</div>
-      <div class="legenda">Satisfeito</div>
-      <div class="legenda">Totalmente<br>Satisfeito</div>
+      <span>Crítico</span>
+      <span>Neutro</span>
+      <span>Promotor</span>
     </div>
 
     <form id="form">
       <input type="hidden" id="notaEscolhida" name="nota">
+      <input type="text" id="nome" name="nome" placeholder="NOME DO CLIENTE OU EMPRESA" required>
+      <input type="tel" id="telefone" name="telefone" placeholder="TELEFONE DE CONTATO" required>
 
-      <input type="text" id="nome" name="nome" placeholder="Nome completo" required pattern="[A-Za-zÀ-ÿ\s]+">
-      <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+      <div class="servicos-container">
+        <label class="servicos-label">Serviços Contratados</label>
+        <div class="servicos-list">
+          <label class="checkbox-interface"><input type="checkbox" name="servicos" value="Alarme Monitorado"><span>Alarme Monitorado</span></label>
+          <label class="checkbox-interface"><input type="checkbox" name="servicos" value="Câmeras de Segurança"><span>Câmeras de Segurança</span></label>
+          <label class="checkbox-interface"><input type="checkbox" name="servicos" value="Rastreador Veicular"><span>Rastreador Veicular</span></label>
+          <label class="checkbox-interface"><input type="checkbox" name="servicos" value="Vigilância/Portaria"><span>Vigilância / Portaria</span></label>
+          <label class="checkbox-interface"><input type="checkbox" name="servicos" value="Bombeiro/Limpeza"><span>Bombeiro / Limpeza</span></label>
+        </div>
+      </div>
 
-      <label for="produtos">Selecione seu produto:</label>
-      <select id="produtos" multiple required>
-        <option value="Alarme Monitorado">Alarme Monitorado</option>
-        <option value="Câmeras de Segurança">Câmeras de Segurança</option>
-        <option value="Rastreador Veicular">Rastreador Veicular</option>
-        <option value="Vigilância/Portaria">Vigilância / Portaria</option>
-        <option value="Bombeiro/Limpeza">Bombeiro / Limpeza</option>
-      </select>
-
-      <textarea id="comentarios" name="comentarios" placeholder="Comentários (opcional)"></textarea>
-      <button type="submit" id="btnEnviar">Enviar Avaliação</button>
+      <textarea id="comentarios" name="comentarios" placeholder="COMENTÁRIOS ADICIONAIS (OPCIONAL)"></textarea>
+      <button type="submit" id="btnEnviar">Transmitir Relatório</button>
     </form>
 
-    <div id="agradecimento" style="display:none; text-align:center; margin-top:20px;">
-      <h2>Obrigado pela sua avaliação!</h2>
-      <p>Sua opinião é muito importante para nós.</p>
+    <div id="agradecimento" style="display:none; text-align:center; padding: 40px 0;">
+      <h2 style="color: var(--silver-bright);">Dados Transmitidos!</h2>
+      <p>Agradecemos por ajudar a elevar nossos protocolos de segurança.</p>
     </div>
   </div>
 
   <footer>
-    <p>Monitoramento 24h • Segurança Residencial e Empresarial<br>
-      © 2025 Vegas Vigilância</p>
+    <p>VEGAS VIGILÂNCIA • PROTOCOLO DE SEGURANÇA INTEGRADA<br>© 2025 TECNOLOGIA E PROTEÇÃO INDUSTRIAL</p>
   </footer>
 
   <script>
     const notas = document.querySelectorAll('.nota');
     const notaInput = document.getElementById('notaEscolhida');
-    const form = document.getElementById('form');
-    const btnEnviar = document.getElementById('btnEnviar');
-    let enviando = false;
-
+    
     notas.forEach(nota => {
       nota.addEventListener('click', () => {
         notas.forEach(n => n.classList.remove('selected'));
@@ -247,63 +314,64 @@
       });
     });
 
-    // bloquear números no nome
     document.getElementById('nome').addEventListener('input', function () {
-      this.value = this.value.replace(/[0-9]/g, '');
+      this.value = this.value.toUpperCase().replace(/[0-9]/g, '');
     });
 
-    // telefone só caracteres válidos
     document.getElementById('telefone').addEventListener('input', function () {
       this.value = this.value.replace(/[^0-9()-\s]/g, '');
     });
 
+    const form = document.getElementById('form');
+    const btnEnviar = document.getElementById('btnEnviar');
+    let enviando = false;
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-
       if (enviando) return;
-      enviando = true;
-
-      btnEnviar.disabled = true;
-      btnEnviar.innerText = "Enviando...";
 
       const nota = notaInput.value;
       if (!nota) {
-        alert("Por favor, selecione uma nota antes de enviar o formulário.");
-        enviando = false;
-        btnEnviar.disabled = false;
-        btnEnviar.innerText = "Enviar Avaliação";
+        alert("ALERTA: Selecione uma nota de 1 a 10.");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
-      const produtosSelecionados = Array.from(document.getElementById('produtos').selectedOptions)
-        .map(opt => opt.value)
-        .join(", ");
+      const servicosMarcados = Array.from(document.querySelectorAll('input[name="servicos"]:checked')).map(cb => cb.value);
+      if (servicosMarcados.length === 0) {
+        alert("ALERTA: Selecione pelo menos um serviço.");
+        return;
+      }
+
+      enviando = true;
+      btnEnviar.disabled = true;
+      btnEnviar.innerText = "TRANSMITINDO...";
 
       const formData = new FormData();
-      formData.append("nota", notaInput.value);
+      formData.append("nota", nota);
       formData.append("nome", document.getElementById('nome').value);
       formData.append("telefone", document.getElementById('telefone').value);
-      formData.append("produtos", produtosSelecionados);
+      formData.append("produtos", servicosMarcados.join(", "));
       formData.append("comentarios", document.getElementById('comentarios').value);
 
       fetch("https://script.google.com/macros/s/AKfycbyiGedsPHMibL87lObnRy_nKfHWxhhIOd1gJG14A1fkilz9Mw9dCGaJsxciYsbMIfZGbA/exec", {
         method: "POST",
         body: formData
       })
-        .then(res => res.text())
-        .then(() => {
-          document.getElementById('form').style.display = 'none';
-          document.getElementById('agradecimento').style.display = 'block';
-        })
-        .catch(() => {
-          enviando = false;
-          btnEnviar.disabled = false;
-          btnEnviar.innerText = "Enviar Avaliação";
-          alert("Erro ao enviar. Verifique sua conexão.");
-        });
+      .then(() => {
+        document.getElementById('form').style.display = 'none';
+        document.getElementById('notas').style.display = 'none';
+        document.querySelector('.legendas').style.display = 'none';
+        document.getElementById('agradecimento').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(() => {
+        enviando = false;
+        btnEnviar.disabled = false;
+        btnEnviar.innerText = "REPETIR TRANSMISSÃO";
+        alert("FALHA NA TRANSMISSÃO.");
+      });
     });
   </script>
 </body>
-
 </html>
-
