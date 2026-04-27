@@ -368,6 +368,7 @@
         <option>Bruna</option>
         <option>Cássio</option>
         <option>Christopher</option>
+        <option>Débora</option>
         <option>Emmeline</option>
         <option>Fernanda</option>
         <option>Gilson</option>
@@ -447,8 +448,9 @@
       formData.append("telefone", document.getElementById('telefone').value);
       formData.append("produtos", servicosMarcados.join(", "));
       formData.append("comentarios", document.getElementById('comentarios').value);
+      formData.append("funcionario", document.getElementById('funcionario').value);
 
-      fetch("https://script.google.com/macros/s/AKfycbyiGedsPHMibL87lObnRy_nKfHWxhhIOd1gJG14A1fkilz9Mw9dCGaJsxciYsbMIfZGbA/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbzccl33qBNMbNzThJS6WorJYUXyw5rkumh8DwF8PpaZOY-EJY4GnaAxQxVmB3dJvYwpSQ/exec", {
         method: "POST",
         body: formData
       })
