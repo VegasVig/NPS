@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NPS Vegas Vigilância</title>
+  <title>Feedback - Vegas Vigilância</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap"
     rel="stylesheet">
@@ -18,11 +18,7 @@
       --border-glass: rgba(192, 192, 192, 0.2);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background-color: var(--bg-dark);
@@ -39,7 +35,7 @@
     }
 
     header {
-      padding: 30px 20px;
+      padding: 40px 20px 20px;
       text-align: center;
       background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
     }
@@ -50,12 +46,13 @@
     }
 
     .container {
-      max-width: 600px;
+      max-width: 520px;
+      width: 90%;
       margin: 20px auto;
       background: var(--glass-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      padding: 40px;
+      padding: 45px 40px;
       border-radius: 12px;
       border: 1px solid var(--border-glass);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(192, 192, 192, 0.05);
@@ -79,214 +76,62 @@
       letter-spacing: 2px;
       color: var(--silver-bright);
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
       text-align: center;
     }
 
     p {
       font-size: 17px;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
       color: #a0a0a0;
       text-align: center;
     }
 
-    /* NOTAS COLORIDAS NPS */
-    .notas {
-      display: flex;
-      justify-content: space-between;
-      gap: 5px;
-      margin-bottom: 10px;
-    }
-
-    .nota {
-      flex: 1;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 700;
-      font-family: 'Orbitron', sans-serif;
-      color: #000;
-      transition: all 0.3s ease;
-      font-size: 14px;
-      border: 2px solid transparent;
-    }
-
-    .nota[data-value="1"],
-    .nota[data-value="2"] {
-      background: #ff4d4d;
-    }
-
-    .nota[data-value="3"],
-    .nota[data-value="4"] {
-      background: #ff6a00;
-    }
-
-    .nota[data-value="5"],
-    .nota[data-value="6"] {
-      background: #ffcc00;
-    }
-
-    .nota[data-value="7"],
-    .nota[data-value="8"] {
-      background: #c6ff00;
-    }
-
-    .nota[data-value="9"],
-    .nota[data-value="10"] {
-      background: #4CAF50;
-    }
-
-    .nota:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.2);
-    }
-
-    .nota.selected {
-      border-color: #fff;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-      transform: scale(1.05);
-    }
-
-    .legendas {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--silver-dark);
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    form {
+    .opcoes {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
     }
 
-    input[type="text"],
-    input[type="tel"],
-    textarea {
-      width: 100%;
-      padding: 12px 15px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(192, 192, 192, 0.2);
-      border-radius: 4px;
-      color: #fff;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 16px;
-    }
-
-    /* AJUSTE DOS SERVIÇOS EM FILA (UM POR LINHA) */
-    .servicos-container {
-      text-align: left;
-    }
-
-    .servicos-label {
-      display: block;
-      margin-bottom: 12px;
-      font-weight: 600;
-      color: var(--silver-main);
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-align: center;
-    }
-
-    .servicos-list {
+    .btn-opcao {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-    }
-
-    .checkbox-interface input[type="checkbox"] {
-      display: none;
-    }
-
-    .checkbox-interface span {
-      display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
+      gap: 6px;
+      padding: 24px 20px;
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(192, 192, 192, 0.1);
-      border-radius: 6px;
+      border: 1px solid rgba(192, 192, 192, 0.15);
+      border-radius: 8px;
       cursor: pointer;
-      color: #a0a0a0;
-      font-size: 15px;
-      font-weight: 500;
-      transition: all 0.2s ease;
+      text-decoration: none;
+      transition: all 0.25s ease;
     }
 
-    .checkbox-interface span:hover {
-      background: rgba(192, 192, 192, 0.05);
-      border-color: rgba(192, 192, 192, 0.3);
-    }
-
-    .checkbox-interface input[type="checkbox"]:checked+span {
-      background: rgba(192, 192, 192, 0.15);
+    .btn-opcao:hover {
+      background: rgba(192, 192, 192, 0.1);
       border-color: var(--silver-main);
-      color: var(--silver-bright);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     }
 
-    .checkbox-interface span::after {
-      content: '';
-      width: 18px;
-      height: 18px;
-      border: 1px solid rgba(192, 192, 192, 0.3);
-      border-radius: 3px;
-      display: inline-block;
-    }
-
-    .checkbox-interface input[type="checkbox"]:checked+span::after {
-      content: '✓';
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--silver-main);
-      color: #000;
-      border-color: #fff;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    textarea {
-      resize: none;
-      min-height: 80px;
-    }
-
-    button {
-      background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 50%, #808080 51%, #b0b0b0 100%);
-      color: #000;
-      padding: 15px;
-      border: 1px solid #fff;
-      border-radius: 4px;
-      cursor: pointer;
+    .btn-opcao .titulo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--silver-bright);
       text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-top: 10px;
     }
 
-    button:hover {
-      filter: brightness(1.1);
-      box-shadow: 0 0 20px rgba(3, 2, 2, 0.3);
+    .btn-opcao .desc {
+      font-size: 14px;
+      color: var(--silver-dark);
     }
 
-    select {
-      width: 100%;
-      padding: 12px 15px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(192, 192, 192, 0.2);
-      border-radius: 4px;
-      color: #fff;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 16px;
+    .btn-opcao .icone {
+      font-size: 30px;
+      margin-bottom: 4px;
     }
 
     footer {
@@ -299,15 +144,7 @@
     }
 
     @media (max-width: 480px) {
-      .container {
-        width: 95%;
-        padding: 25px 15px;
-      }
-
-      .nota {
-        height: 35px;
-        font-size: 12px;
-      }
+      .container { padding: 30px 20px; }
     }
   </style>
 </head>
@@ -320,84 +157,20 @@
 
   <div class="container">
     <h2>Sistema de Feedback</h2>
-    <p>O quanto você indicaria a Vegas para um parceiro?</p>
+    <p>Selecione abaixo o tipo de resposta que deseja enviar.</p>
 
-    <div class="notas" id="notas">
-      <div class="nota" data-value="1">01</div>
-      <div class="nota" data-value="2">02</div>
-      <div class="nota" data-value="3">03</div>
-      <div class="nota" data-value="4">04</div>
-      <div class="nota" data-value="5">05</div>
-      <div class="nota" data-value="6">06</div>
-      <div class="nota" data-value="7">07</div>
-      <div class="nota" data-value="8">08</div>
-      <div class="nota" data-value="9">09</div>
-      <div class="nota" data-value="10">10</div>
-    </div>
+    <div class="opcoes">
+      <a class="btn-opcao" href="./index.html">
+        <span class="icone">🤝</span>
+        <span class="titulo">Sou Cliente</span>
+        <span class="desc">Avaliar os serviços contratados</span>
+      </a>
 
-    <div class="legendas">
-      <span>Crítico</span>
-      <span>Neutro</span>
-      <span>Promotor</span>
-    </div>
-
-    <form id="form">
-      <input type="hidden" id="notaEscolhida" name="nota">
-      <input type="text" id="nome" name="nome" placeholder="NOME DO CLIENTE OU EMPRESA" required>
-      <input type="tel" id="telefone" name="telefone" placeholder="TELEFONE DE CONTATO" required>
-
-      <div class="servicos-container">
-        <label class="servicos-label">Serviços Contratados</label>
-        <div class="servicos-list">
-          <label class="checkbox-interface"><input type="checkbox" name="servicos"
-              value="Alarme Monitorado"><span>Alarme Monitorado</span></label>
-          <label class="checkbox-interface"><input type="checkbox" name="servicos"
-              value="Câmeras de Segurança"><span>Câmeras de Segurança</span></label>
-          <label class="checkbox-interface"><input type="checkbox" name="servicos"
-              value="Rastreador Veicular"><span>Rastreador Veicular</span></label>
-          <label class="checkbox-interface"><input type="checkbox" name="servicos"
-              value="Vigilância/Portaria"><span>Vigilância / Portaria</span></label>
-          <label class="checkbox-interface"><input type="checkbox" name="servicos"
-              value="Bombeiro/Limpeza"><span>Bombeiro / Limpeza</span></label>
-        </div>
-      </div>
-      <select id="funcionario" name="funcionario" required>
-        <option value="">SELECIONE O ATENDENTE</option>
-        <option>Amanda</option>
-        <option>André</option>
-        <option>Bruna</option>
-        <option>Cássio</option>
-        <option>Christopher</option>
-        <option>Daiane</option>
-        <option>Débora</option>
-        <option>Deiziane</option>
-        <option>Emmeline</option>
-        <option>Fernanda</option>
-        <option>Gilson</option>
-        <option>Jocilene</option>
-        <option>Julia</option>
-        <option>Laura</option>
-        <option>Luzia</option>
-        <option>Matheus</option>
-        <option>Nancy</option>
-        <option>Rayane</option>
-        <option>Roberta</option>
-        <option>Sandra</option>
-        <option>Thais</option>
-        <option>Yuri</option>
-
-
-
-
-      </select>
-
-      <textarea id="comentarios" name="comentarios" placeholder="COMENTÁRIOS ADICIONAIS (OPCIONAL)"></textarea>
-      <button type="submit" id="btnEnviar">Transmitir Relatório</button>
-    </form>
-
-    <div id="agradecimento" style="display:none; text-align:center; padding: 40px 0;">
-      <h2 style="color: var(--silver-bright);">Dados Transmitidos!</h2>
-      <p>Agradecemos por ajudar a elevar nossos protocolos de segurança.</p>
+      <a class="btn-opcao" href="./nps_funcionario.html">
+        <span class="icone">👤</span>
+        <span class="titulo">Sou Funcionário</span>
+        <span class="desc">Pesquisa interna</span>
+      </a>
     </div>
   </div>
 
@@ -405,78 +178,6 @@
     <p>VEGAS VIGILÂNCIA • PROTOCOLO DE SEGURANÇA INTEGRADA<br>© 2025 TECNOLOGIA E PROTEÇÃO INDUSTRIAL</p>
   </footer>
 
-  <script>
-    const notas = document.querySelectorAll('.nota');
-    const notaInput = document.getElementById('notaEscolhida');
-
-    notas.forEach(nota => {
-      nota.addEventListener('click', () => {
-        notas.forEach(n => n.classList.remove('selected'));
-        nota.classList.add('selected');
-        notaInput.value = nota.dataset.value;
-      });
-    });
-
-    document.getElementById('nome').addEventListener('input', function () {
-      this.value = this.value.toUpperCase().replace(/[0-9]/g, '');
-    });
-
-    document.getElementById('telefone').addEventListener('input', function () {
-      this.value = this.value.replace(/[^0-9()-\s]/g, '');
-    });
-
-    const form = document.getElementById('form');
-    const btnEnviar = document.getElementById('btnEnviar');
-    let enviando = false;
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (enviando) return;
-
-      const nota = notaInput.value;
-      if (!nota) {
-        alert("ALERTA: Selecione uma nota de 1 a 10.");
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
-
-      const servicosMarcados = Array.from(document.querySelectorAll('input[name="servicos"]:checked')).map(cb => cb.value);
-      if (servicosMarcados.length === 0) {
-        alert("ALERTA: Selecione pelo menos um serviço.");
-        return;
-      }
-
-      enviando = true;
-      btnEnviar.disabled = true;
-      btnEnviar.innerText = "TRANSMITINDO...";
-
-      const formData = new FormData();
-      formData.append("nota", nota);
-      formData.append("nome", document.getElementById('nome').value);
-      formData.append("telefone", document.getElementById('telefone').value);
-      formData.append("produtos", servicosMarcados.join(", "));
-      formData.append("comentarios", document.getElementById('comentarios').value);
-      formData.append("funcionario", document.getElementById('funcionario').value);
-
-      fetch("https://script.google.com/macros/s/AKfycbzktmCreDHHKxXP7L_Ne5N_K6--vIHuLTr20JIqPPCxCUXek_bye7QAjgkAqdD2POksUQ/exec", {
-        method: "POST",
-        body: formData
-      })
-        .then(() => {
-          document.getElementById('form').style.display = 'none';
-          document.getElementById('notas').style.display = 'none';
-          document.querySelector('.legendas').style.display = 'none';
-          document.getElementById('agradecimento').style.display = 'block';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        })
-        .catch(() => {
-          enviando = false;
-          btnEnviar.disabled = false;
-          btnEnviar.innerText = "REPETIR TRANSMISSÃO";
-          alert("FALHA NA TRANSMISSÃO.");
-        });
-    });
-  </script>
 </body>
 
 </html>
